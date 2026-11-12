@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Aplicativo – Cálculo Numérico Interativo</title>
+  <style>
+    html, body { margin: 0; height: 100%; font-family: Inter, system-ui, sans-serif; background: #f5f7fb; }
+    header {
+      display: flex; align-items: center; gap: 16px; height: 52px; padding: 0 18px;
+      background: #102a63; color: #fff;
+    }
+    header a { color: #f2a443; text-decoration: none; font-weight: 600; }
+    header h1 { font-size: 1rem; font-weight: 600; margin: 0; }
+    #area { position: absolute; top: 52px; left: 0; right: 0; bottom: 0; }
+    #aviso { padding: 24px; color: #444; }
+  </style>
+  <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+</head>
+<body>
+  <header>
+    <a href="javascript:history.back()">← Voltar ao livro</a>
+    <h1 id="titulo">Aplicativo</h1>
+  </header>
+  <div id="area" class="tela"><p id="aviso">Carregando o GeoGebra…</p><div id="ggb"></div></div>
+  <script>
+    const q = new URLSearchParams(location.search)
+    const arquivo = q.get('arquivo') || ''
+    const titulo = q.get('titulo') || 'Aplicativo'
+    document.getElementById('titulo').textContent = titulo
+    document.title = titulo + ' – Cálculo Numérico Interativo'
+    // só aceita arquivos .ggb da pasta ggb deste site
+    const base = location.pathname.replace(/aplicativo(\.html)?$/, '')
+    if (!/^\/ggb\/[\w.-]+\.ggb$/.test(arquivo)) {
+      document.getElementById('aviso').textContent = 'Aplicativo não encontrado.'
+    } else {
+      new GGBApplet({
+        filename: base + arquivo.slice(1),
+        width: Number(q.get('l')) || 1366,
+        height: Number(q.get('a')) || 720,
+        showToolBar: false, showAlgebraInput: false, showMenuBar: false,
+        showResetIcon: true, enableRightClick: false, showZoomButtons: true,
+        language: 'pt', scaleContainerClass: 'tela', allowUpscale: true,
+        appletOnLoad: () => { document.getElementById('aviso').remove() }
+      }, true).inject('ggb')
+    }
+  </script>
+</body>
+</html>
