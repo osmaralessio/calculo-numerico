@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 660" font-family="Helvetica,Arial,sans-serif">
+  <defs><pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#2a4aa8" stroke-width="0.6"/></pattern></defs>
+  <rect width="480" height="660" fill="#16307a"/><rect width="480" height="570" fill="url(#g)" opacity=".5"/>
+  <rect width="480" height="5" fill="#e8891a"/>
+  <text x="48" y="38" fill="#cfd8f2" font-size="11" font-family="Georgia,serif" letter-spacing="1">UNIVERSIDADE FEDERAL DO TRIÂNGULO MINEIRO</text>
+  <text x="48" y="54" fill="#cfd8f2" font-size="9">Licenciatura em Matemática – ICENE</text>
+  <text x="48" y="118" fill="#fff" font-size="40" font-weight="600">Cálculo</text>
+  <text x="48" y="164" fill="#fff" font-size="40" font-weight="600">Numérico</text>
+  <text x="48" y="210" fill="#fff" font-size="40" font-weight="600">Interativo</text>
+  <text x="48" y="266" fill="#f2a443" font-size="10.5">Aritmética de ponto flutuante, zeros de funções,</text>
+  <text x="48" y="281" fill="#f2a443" font-size="10.5">sistemas lineares, interpolação, ajuste de curvas,</text>
+  <text x="48" y="296" fill="#f2a443" font-size="10.5">integração numérica e equações diferenciais</text>
+  <text x="48" y="311" fill="#f2a443" font-size="10.5">com aplicativos no GeoGebra</text>
+  <line x1="190" y1="440" x2="400" y2="440" stroke="#9fb0e0" stroke-width="1"/>
+  <line x1="270" y1="345" x2="270" y2="500" stroke="#9fb0e0" stroke-width="1"/>
+  <path d="M205 355 C 225 430, 235 470, 245 468 C 262 465, 290 390, 335 392 C 355 393, 365 430, 385 500" fill="none" stroke="#e8891a" stroke-width="2.5"/>
+  <line x1="295" y1="393" x2="378" y2="390" stroke="#cfd8f2" stroke-width="1"/>
+  <circle cx="219" cy="413" r="3.5" fill="#fff" stroke="#16307a"/><circle cx="245" cy="467" r="3.5" fill="#fff" stroke="#16307a"/>
+  <circle cx="318" cy="400" r="3.5" fill="#fff" stroke="#16307a"/><circle cx="369" cy="440" r="3.5" fill="#fff" stroke="#16307a"/>
+  <rect y="572" width="480" height="88" fill="#1d3b8c"/>
+  <text x="48" y="612" fill="#fff" font-size="15" font-weight="600">Osmar Alessio</text>
+  <text x="48" y="636" fill="#cfd8f2" font-size="10">Uberaba – MG  •  2026</text>
+</svg>

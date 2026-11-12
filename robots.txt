@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://osmaralessio.github.io/calculo-numerico/sitemap.xml
