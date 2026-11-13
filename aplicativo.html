@@ -2,48 +2,69 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#102a63">
   <title>Aplicativo – Cálculo Numérico Interativo</title>
   <style>
-    html, body { margin: 0; height: 100%; font-family: Inter, system-ui, sans-serif; background: #f5f7fb; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; font-family: Inter, system-ui, -apple-system, sans-serif; background: #eef1f7; }
     header {
-      display: flex; align-items: center; gap: 16px; height: 52px; padding: 0 18px;
+      position: sticky; top: 0; height: 52px; z-index: 60;
+      display: flex; align-items: center; gap: 14px; padding: 0 14px;
       background: #102a63; color: #fff;
     }
-    header a { color: #f2a443; text-decoration: none; font-weight: 600; }
-    header h1 { font-size: 1rem; font-weight: 600; margin: 0; }
-    #area { position: absolute; top: 52px; left: 0; right: 0; bottom: 0; }
-    #aviso { padding: 24px; color: #444; }
+    header a { color: #f2a443; text-decoration: none; font-weight: 600; font-size: 0.95rem; white-space: nowrap; }
+    header h1 { font-size: 1rem; font-weight: 600; margin: 0; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #area { padding: 8px; }
+    #carregando { padding: 16px; color: #444; }
+    /* celular deitado: barra do topo fina, para sobrar espaço ao aplicativo */
+    @media (orientation: landscape) and (max-height: 520px) {
+      header { height: 34px; }
+      header h1 { font-size: 0.85rem; }
+      header a { font-size: 0.8rem; }
+      #area { padding: 4px; }
+    }
   </style>
-  <script src="https://www.geogebra.org/apps/deployggb.js"></script>
 </head>
 <body>
   <header>
-    <a href="javascript:history.back()">← Voltar ao livro</a>
+    <a id="voltar" href="./">← Voltar ao livro</a>
     <h1 id="titulo">Aplicativo</h1>
   </header>
-  <div id="area" class="tela"><p id="aviso">Carregando o GeoGebra…</p><div id="ggb"></div></div>
+  <p id="carregando">Carregando o GeoGebra…</p>
+  <div id="area"></div>
+
+  <script src="ggb-moldura.js"></script>
   <script>
-    const q = new URLSearchParams(location.search)
-    const arquivo = q.get('arquivo') || ''
-    const titulo = q.get('titulo') || 'Aplicativo'
+    var q = new URLSearchParams(location.search)
+    var arquivo = q.get('arquivo') || ''
+    var titulo = q.get('titulo') || 'Aplicativo'
     document.getElementById('titulo').textContent = titulo
     document.title = titulo + ' – Cálculo Numérico Interativo'
+
+    // volta para a página de onde veio (ou para a página inicial do livro)
+    var base = location.pathname.replace(/aplicativo(\.html)?$/, '')
+    var voltar = document.getElementById('voltar')
+    voltar.href = base
+    voltar.addEventListener('click', function (e) {
+      if (document.referrer && new URL(document.referrer).origin === location.origin) {
+        e.preventDefault(); history.back()
+      }
+    })
+
     // só aceita arquivos .ggb da pasta ggb deste site
-    const base = location.pathname.replace(/aplicativo(\.html)?$/, '')
     if (!/^\/ggb\/[\w.-]+\.ggb$/.test(arquivo)) {
-      document.getElementById('aviso').textContent = 'Aplicativo não encontrado.'
+      document.getElementById('carregando').textContent = 'Aplicativo não encontrado.'
     } else {
-      new GGBApplet({
-        filename: base + arquivo.slice(1),
-        width: Number(q.get('l')) || 1366,
-        height: Number(q.get('a')) || 720,
-        showToolBar: false, showAlgebraInput: false, showMenuBar: false,
-        showResetIcon: true, enableRightClick: false, showZoomButtons: true,
-        language: 'pt', scaleContainerClass: 'tela', allowUpscale: true,
-        appletOnLoad: () => { document.getElementById('aviso').remove() }
-      }, true).inject('ggb')
+      MolduraGGB.montar(document.getElementById('area'), {
+        arquivo: base + arquivo.slice(1),
+        W: Number(q.get('l')) || 1366,
+        H: Number(q.get('a')) || 720,
+        pagina: true,
+        topo: function () { return document.querySelector('header').offsetHeight + 16 },
+        carregou: function () { var c = document.getElementById('carregando'); if (c) c.remove() }
+      })
     }
   </script>
 </body>
