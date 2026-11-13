@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#102a63">
-  <title>Aplicativo – Cálculo Numérico Interativo</title>
+  <title>Aplicativo – Cálculo Numérico Interativo com GeoGebra</title>
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; font-family: Inter, system-ui, -apple-system, sans-serif; background: #eef1f7; }
@@ -41,7 +41,7 @@
     var arquivo = q.get('arquivo') || ''
     var titulo = q.get('titulo') || 'Aplicativo'
     document.getElementById('titulo').textContent = titulo
-    document.title = titulo + ' – Cálculo Numérico Interativo'
+    document.title = titulo + ' – Cálculo Numérico Interativo com GeoGebra'
 
     // volta para a página de onde veio (ou para a página inicial do livro)
     var base = location.pathname.replace(/aplicativo(\.html)?$/, '')
